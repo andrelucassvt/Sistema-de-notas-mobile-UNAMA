@@ -22,6 +22,7 @@ class _HomeState extends State<Home> {
   
   TextEditingController nota1 = TextEditingController();
   TextEditingController notaColegiada = TextEditingController();
+  GlobalKey<FormState> validacao = GlobalKey<FormState>();
 
   String resultado ="";
   String resultFinal = "";
@@ -82,11 +83,12 @@ class _HomeState extends State<Home> {
 
         body:SingleChildScrollView(
 
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
+          child: Form(
+            child: Column(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
 
           Icon(Icons.account_circle,size: 120.0,color: Colors.green,),
 
-          TextField(keyboardType: TextInputType.numberWithOptions(decimal: true),
+          TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
 
             labelText: "Digite sua nota",labelStyle: TextStyle(color: Colors.blue,
@@ -95,11 +97,16 @@ class _HomeState extends State<Home> {
 
             style: TextStyle(color: Colors.blue,fontSize: 15.0),
             controller: nota1,
+            validator: (value){
+              if(value.isEmpty){
+                return "Campo vazio!! Digite sua nota!!";
+              }
+            },
           ),
 
           Padding(padding: EdgeInsets.all(15.0)),
 
-          TextField(keyboardType: TextInputType.numberWithOptions(decimal: true),
+          TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
             labelText: "Digite sua nota",labelStyle: TextStyle(color: Colors.blue,
             fontSize: 15.0),
@@ -107,6 +114,11 @@ class _HomeState extends State<Home> {
 
               style: TextStyle(color: Colors.blue,fontSize: 15.0),
               controller: notaColegiada,
+              validator: (value){
+                if(value.isEmpty){
+                  return "Campo vazio!! Digite sua nota!!";
+                }
+              },
           ),
 
           Padding(padding: EdgeInsets.all(25.0)),
@@ -117,7 +129,7 @@ class _HomeState extends State<Home> {
 
           Text(resultado, style: TextStyle(color: Colors.blue,fontSize: 20,),),
            Text(resultFinal, style: TextStyle(color: Colors.blue,fontSize: 20,),),
-          ],),
+          ],),)
         
         ),
         
@@ -132,7 +144,11 @@ class _HomeState extends State<Home> {
         floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.green,
-        onPressed: (){_calcular();},
+        onPressed: (){
+          if(validacao.currentState.validate()){
+            _calcular();
+          }
+        },
         ),
 
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
