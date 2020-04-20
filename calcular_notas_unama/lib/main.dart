@@ -34,6 +34,7 @@ class _HomeState extends State<Home> {
       nota1.text = "";
       notaColegiada.text = "";
       resultFinal = "";
+      validacao = GlobalKey<FormState>();
     });
   }
 
@@ -84,6 +85,7 @@ class _HomeState extends State<Home> {
         body:SingleChildScrollView(
 
           child: Form(
+            key: validacao,
             child: Column(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
 
           Icon(Icons.account_circle,size: 120.0,color: Colors.green,),
