@@ -53,7 +53,8 @@ class _HomeState extends State<Home> {
        resultado = "Nota inválida";
        
     }else{
-        if(media >=7){
+
+      if(media >=7){
       resultado = "Você passou";
 
     }else if(media < 7 && media >=4){
@@ -73,7 +74,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
         appBar: AppBar(
 
-          title: Text("Calule sua nota",style: TextStyle(color: Colors.white),),
+          title: Text("Calcule sua nota",style: TextStyle(color: Colors.white),),
           backgroundColor: Colors.blue,
           
           actions: <Widget>[
@@ -89,14 +90,17 @@ class _HomeState extends State<Home> {
             child: Column(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
 
           Icon(Icons.account_circle,size: 120.0,color: Colors.green,),
-
+          Padding(padding: EdgeInsets.all(15.0)),
           TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
 
             labelText: "Digite sua nota",labelStyle: TextStyle(color: Colors.blue,
             fontSize: 15.0),
-              ),
 
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(32))
+              ),
+            
             style: TextStyle(color: Colors.blue,fontSize: 15.0),
             controller: nota1,
             validator: (value){
@@ -112,6 +116,9 @@ class _HomeState extends State<Home> {
           decoration: InputDecoration(
             labelText: "Digite sua nota",labelStyle: TextStyle(color: Colors.blue,
             fontSize: 15.0),
+
+             border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(32))
               ),
 
               style: TextStyle(color: Colors.blue,fontSize: 15.0),
@@ -123,11 +130,11 @@ class _HomeState extends State<Home> {
               },
           ),
 
-          Padding(padding: EdgeInsets.all(25.0)),
+          Padding(padding: EdgeInsets.all(20.0)),
 
           Text("Resultado:", style: TextStyle(color: Colors.green,fontSize: 20,),),
 
-          Padding(padding: EdgeInsets.all(20.0)),
+          Padding(padding: EdgeInsets.all(10.0)),
 
           Text(resultado, style: TextStyle(color: Colors.blue,fontSize: 20,),),
            Text(resultFinal, style: TextStyle(color: Colors.blue,fontSize: 20,),),
@@ -141,10 +148,11 @@ class _HomeState extends State<Home> {
             shape: const CircularNotchedRectangle(),
             child: Container(height: 50.0,),
             color: Colors.blue,
+            
           ),
 
         floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(Icons.offline_pin),
         backgroundColor: Colors.green,
         onPressed: (){
           if(validacao.currentState.validate()){
