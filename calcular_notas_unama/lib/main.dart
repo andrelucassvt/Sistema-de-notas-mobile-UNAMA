@@ -56,7 +56,7 @@ class _HomeState extends State<Home> {
 
       if(media >=7){
       resultado = "Você passou";
-
+      resultFinal = "";
     }else if(media < 7 && media >=4){
       resultado = "Você ficou de prova final";
       resultFinal = "Precisa tirar $provaFinal para passar"; 
@@ -64,6 +64,7 @@ class _HomeState extends State<Home> {
 
     }else if(media<4){
       resultado = "Você reprovou";
+      resultFinal = "";
     }
     }});
 
@@ -110,7 +111,7 @@ class _HomeState extends State<Home> {
             },
           ),
 
-          Padding(padding: EdgeInsets.all(15.0)),
+          Padding(padding: EdgeInsets.all(20.0)),
 
           TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
@@ -130,14 +131,7 @@ class _HomeState extends State<Home> {
               },
           ),
 
-          Padding(padding: EdgeInsets.all(20.0)),
-
-          Text("Resultado:", style: TextStyle(color: Colors.green,fontSize: 20,),),
-
-          Padding(padding: EdgeInsets.all(10.0)),
-
-          Text(resultado, style: TextStyle(color: Colors.blue,fontSize: 20,),),
-           Text(resultFinal, style: TextStyle(color: Colors.blue,fontSize: 20,),),
+          
           ],),)
         
         ),
@@ -157,6 +151,20 @@ class _HomeState extends State<Home> {
         onPressed: (){
           if(validacao.currentState.validate()){
             _calcular();
+            showDialog<String>(context: context,
+            
+            builder: (BuildContext context)=> AlertDialog(
+
+              title: Text("Resultado"),
+              content: Text("$resultado, $resultFinal"),
+              actions: <Widget>[
+                FlatButton(
+                onPressed: ()=> Navigator.pop(context,'OK'),
+                child: Text("OK"))
+
+              ],
+            )
+            );
           }
         },
         ),
