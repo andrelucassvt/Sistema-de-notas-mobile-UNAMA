@@ -41,15 +41,15 @@ class _HomeState extends State<Home> {
 
   void _calcular(){
     setState(() {
-      double nota1AV = double.parse(nota1.text);
-      double nota2AV = double.parse(notaColegiada.text);
+      double nota1AV = double.parse(nota1.text.replaceAll(",", "."));
+      double nota2AV = double.parse(notaColegiada.text.replaceAll(",", "."));
       double media = (nota1AV + nota2AV) /2;
       double provaFinal = 10 - media;
 
-    if(nota1AV > 10){
+    if(nota1AV > 10 || nota2AV >10){
       resultado = "Nota inválida";
       
-    }else if(nota2AV >10){
+    }else if(nota1AV < 0 || nota2AV <0){
        resultado = "Nota inválida";
        
     }else{
