@@ -66,9 +66,11 @@ class _HomeState extends State<Home> {
       
     if(nota1AV > 10 || nota2AV > 10){
       resultado = "Nota inválida";
+      resultFinal = "";
       
     }else if(nota1AV < 0 || nota2AV < 0){
        resultado = "Nota inválida";
+       resultFinal = "";
        
     }else{
 
