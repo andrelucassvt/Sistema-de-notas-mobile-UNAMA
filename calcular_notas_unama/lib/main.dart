@@ -24,8 +24,21 @@ class _HomeState extends State<Home> {
   TextEditingController notaColegiada = TextEditingController();
   GlobalKey<FormState> validacao = GlobalKey<FormState>();
 
+
+ 
   String resultado ="";
   String resultFinal = "";
+
+  void tamanhoValidacao(){
+
+    if( nota1.text.length==5|| notaColegiada.text.length==5){
+       resultado = "Nota inválida";
+       resultFinal = "";
+    }
+   
+  }
+
+
 
 
   void _refres(){
@@ -46,10 +59,15 @@ class _HomeState extends State<Home> {
       double media = (nota1AV + nota2AV) /2;
       double provaFinal = 10 - media;
 
-    if(nota1AV > 10 || nota2AV >10){
+      if( nota1.text.length>=5|| notaColegiada.text.length>=5){
+       resultado = "Nota inválida";
+       resultFinal = "";
+      }else
+      
+    if(nota1AV > 10 || nota2AV > 10){
       resultado = "Nota inválida";
       
-    }else if(nota1AV < 0 || nota2AV <0){
+    }else if(nota1AV < 0 || nota2AV < 0){
        resultado = "Nota inválida";
        
     }else{
@@ -95,7 +113,7 @@ class _HomeState extends State<Home> {
           TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
 
-            labelText: "Digite sua nota",labelStyle: TextStyle(color: Colors.blue,
+            labelText: "1º avaliação",labelStyle: TextStyle(color: Colors.blue,
             fontSize: 15.0),
 
             border: OutlineInputBorder(
@@ -106,7 +124,7 @@ class _HomeState extends State<Home> {
             controller: nota1,
             validator: (value){
               if(value.isEmpty){
-                return "Campo vazio!! Digite sua nota!!";
+                return "Campo vazio!!";
               }
             },
           ),
@@ -115,7 +133,7 @@ class _HomeState extends State<Home> {
 
           TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
-            labelText: "Digite sua nota",labelStyle: TextStyle(color: Colors.blue,
+            labelText: "2º avaliação",labelStyle: TextStyle(color: Colors.blue,
             fontSize: 15.0),
 
              border: OutlineInputBorder(
@@ -126,7 +144,7 @@ class _HomeState extends State<Home> {
               controller: notaColegiada,
               validator: (value){
                 if(value.isEmpty){
-                  return "Campo vazio!! Digite sua nota!!";
+                  return "Campo vazio!!";
                 }
               },
           ),
