@@ -59,6 +59,8 @@ class _HomeState extends State<Home> {
       double media = (nota1AV + nota2AV) /2;
       double provaFinal = 10 - media;
 
+      String formato = provaFinal.toStringAsFixed(2);
+      
       if( nota1.text.length>=5|| notaColegiada.text.length>=5){
        resultado = "Nota inválida";
        resultFinal = "";
@@ -79,7 +81,7 @@ class _HomeState extends State<Home> {
       resultFinal = "";
     }else if(media < 7 && media >=4){
       resultado = "Você ficou de prova final";
-      resultFinal = "Precisa tirar $provaFinal para passar"; 
+      resultFinal = "Precisa tirar $formato para passar"; 
       
 
     }else if(media<4){
@@ -103,14 +105,22 @@ class _HomeState extends State<Home> {
           ],
           
         ),
-
+        
         body:SingleChildScrollView(
 
           child: Form(
-            key: validacao,
-            child: Column(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
-
-          Icon(Icons.account_circle,size: 120.0,color: Colors.green,),
+          key: validacao,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
+          
+          ClipOval(
+            child: Align(
+              heightFactor: 1.0,
+              widthFactor: 0.5,
+              child: Image.asset("Imagens/ser.png",fit: BoxFit.cover,height: 150,), 
+              //Icon(Icons.account_circle,size: 120.0,color: Colors.green,),
+            ),
+          ),
+         
           Padding(padding: EdgeInsets.all(15.0)),
           TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
@@ -140,6 +150,7 @@ class _HomeState extends State<Home> {
 
              border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32))
+              
               ),
 
               style: TextStyle(color: Colors.blue,fontSize: 15.0),
