@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+
 void main(){
 
   runApp(MaterialApp(
@@ -95,6 +96,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        //Barra de cima do app
         appBar: AppBar(
 
           title: Text("Calcule sua nota",style: TextStyle(color: Colors.white),),
@@ -105,23 +107,24 @@ class _HomeState extends State<Home> {
           ],
           
         ),
-        
+        //Corpo do app
         body:SingleChildScrollView(
 
           child: Form(
           key: validacao,
           child: Column(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
           
+          //Imagem adicionada
           ClipOval(
             child: Align(
               heightFactor: 1.0,
               widthFactor: 0.5,
               child: Image.asset("Imagens/ser.png",fit: BoxFit.cover,height: 150,), 
-              //Icon(Icons.account_circle,size: 120.0,color: Colors.green,),
             ),
           ),
          
           Padding(padding: EdgeInsets.all(15.0)),
+          //Area de texto 1° avaliação
           TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
 
@@ -142,7 +145,7 @@ class _HomeState extends State<Home> {
           ),
 
           Padding(padding: EdgeInsets.all(20.0)),
-
+          //Area de texto 2° avaliação
           TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
             labelText: "2º avaliação",labelStyle: TextStyle(color: Colors.blue,
@@ -161,21 +164,41 @@ class _HomeState extends State<Home> {
                 }
               },
           ),
-
           
+          //Area de divulgação 
+          Padding(padding: EdgeInsets.all(50.0)),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: <Widget>[
+
+          Text("Desenvolvedor:",style: TextStyle(color: Colors.black),),
+
+          ],),
+
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: <Widget>[
+          Text("@theandrelucas",style: TextStyle(color: Colors.deepOrange),),
+
+           ClipOval(
+            child: Align(
+              heightFactor: 1.0,
+              widthFactor: 0.5,
+              child: Image.asset("Imagens/Instagram.png",fit: BoxFit.cover,height: 30,), 
+            ),
+          )
+
+          ],)
+          ////////////////////////////
           ],),)
-        
+         
         ),
         
-         
-
+        
+        //Barra de baxio do botão
         bottomNavigationBar: BottomAppBar(
             shape: const CircularNotchedRectangle(),
             child: Container(height: 50.0,),
             color: Colors.blue,
             
           ),
-
+        //Botao
         floatingActionButton: FloatingActionButton(
         child: Icon(Icons.offline_pin),
         backgroundColor: Colors.green,
@@ -199,7 +222,7 @@ class _HomeState extends State<Home> {
           }
         },
         ),
-
+        //Colocando o botão no centro
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
     );
