@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:link/link.dart';
 
 
 void main(){
@@ -20,7 +21,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  
+  void _showErrorSnackBar() {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Oops... the URL couldn\'t be opened!'),
+      ),
+    );
+  }
+
   TextEditingController nota1 = TextEditingController();
   TextEditingController notaColegiada = TextEditingController();
   GlobalKey<FormState> validacao = GlobalKey<FormState>();
@@ -39,7 +47,10 @@ class _HomeState extends State<Home> {
    
   }
 
-
+        Link _link = Link(
+              child: Text('@theandrelucas'),
+              url: 'http://www.google.com',
+            );
 
 
   void _refres(){
@@ -65,31 +76,32 @@ class _HomeState extends State<Home> {
       if( nota1.text.length>=5|| notaColegiada.text.length>=5){
        resultado = "Nota inválida";
        resultFinal = "";
-      }else
-      
-    if(nota1AV > 10 || nota2AV > 10){
-      resultado = "Nota inválida";
-      resultFinal = "";
-      
-    }else if(nota1AV < 0 || nota2AV < 0){
-       resultado = "Nota inválida";
-       resultFinal = "";
-       
-    }else{
 
-      if(media >=7){
-      resultado = "Você passou";
-      resultFinal = "";
-    }else if(media < 7 && media >=4){
-      resultado = "Você ficou de prova final";
-      resultFinal = "Precisa tirar $formato para passar"; 
+      }else{
       
+        if(nota1AV > 10 || nota2AV > 10){
+          resultado = "Nota inválida";
+          resultFinal = "";
+          
+        }else if(nota1AV < 0 || nota2AV < 0){
+          resultado = "Nota inválida";
+          resultFinal = "";
+          
+        }else{
 
-    }else if(media<4){
-      resultado = "Você reprovou";
-      resultFinal = "";
-    }
-    }});
+          if(media >=7){
+          resultado = "Você passou";
+          resultFinal = "";
+        }else if(media < 7 && media >=4){
+          resultado = "Você ficou de prova final";
+          resultFinal = "Precisa tirar $formato para passar"; 
+          
+
+        }else if(media<4){
+          resultado = "Você reprovou";
+          resultFinal = "";
+        }
+        }}});
 
   }
 
@@ -123,7 +135,7 @@ class _HomeState extends State<Home> {
             ),
           ),
          
-          Padding(padding: EdgeInsets.all(15.0)),
+          Padding(padding: EdgeInsets.all(10.0)),
           //Area de texto 1° avaliação
           TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
@@ -144,7 +156,7 @@ class _HomeState extends State<Home> {
             },
           ),
 
-          Padding(padding: EdgeInsets.all(20.0)),
+          Padding(padding: EdgeInsets.all(15.0)),
           //Area de texto 2° avaliação
           TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
@@ -165,27 +177,7 @@ class _HomeState extends State<Home> {
               },
           ),
           
-          //Area de divulgação 
-          Padding(padding: EdgeInsets.all(50.0)),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: <Widget>[
-
-          Text("Desenvolvedor:",style: TextStyle(color: Colors.black),),
-
-          ],),
-
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: <Widget>[
-          Text("@theandrelucas",style: TextStyle(color: Colors.deepOrange),),
-
-           ClipOval(
-            child: Align(
-              heightFactor: 1.0,
-              widthFactor: 0.5,
-              child: Image.asset("Imagens/Instagram.png",fit: BoxFit.cover,height: 30,), 
-            ),
-          )
-
-          ],)
-          ////////////////////////////
+          
           ],),)
          
         ),
