@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:link/link.dart';
+
 
 
 void main(){
@@ -20,37 +20,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-  void _showErrorSnackBar() {
-    Scaffold.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Oops... the URL couldn\'t be opened!'),
-      ),
-    );
-  }
-
+  //Controladores
   TextEditingController nota1 = TextEditingController();
   TextEditingController notaColegiada = TextEditingController();
   GlobalKey<FormState> validacao = GlobalKey<FormState>();
-
-
  
   String resultado ="";
   String resultFinal = "";
 
-  void tamanhoValidacao(){
-
-    if( nota1.text.length==5|| notaColegiada.text.length==5){
-       resultado = "Nota inválida";
-       resultFinal = "";
-    }
-   
-  }
-
-        Link _link = Link(
-              child: Text('@theandrelucas'),
-              url: 'http://www.google.com',
-            );
 
 
   void _refres(){
@@ -70,7 +47,7 @@ class _HomeState extends State<Home> {
       double nota2AV = double.parse(notaColegiada.text.replaceAll(",", "."));
       double media = (nota1AV + nota2AV) /2;
       double provaFinal = 10 - media;
-
+    
       String formato = provaFinal.toStringAsFixed(2);
       
       if( nota1.text.length>=5|| notaColegiada.text.length>=5){
@@ -88,10 +65,10 @@ class _HomeState extends State<Home> {
           resultFinal = "";
           
         }else{
-
           if(media >=7){
           resultado = "Você passou";
           resultFinal = "";
+
         }else if(media < 7 && media >=4){
           resultado = "Você ficou de prova final";
           resultFinal = "Precisa tirar $formato para passar"; 
@@ -183,6 +160,7 @@ class _HomeState extends State<Home> {
         ),
         
         
+        
         //Barra de baxio do botão
         bottomNavigationBar: BottomAppBar(
             shape: const CircularNotchedRectangle(),
@@ -202,7 +180,7 @@ class _HomeState extends State<Home> {
             builder: (BuildContext context)=> AlertDialog(
 
               title: Text("Resultado"),
-              content: Text("$resultado, $resultFinal"),
+              content: Text("$resultado $resultFinal"),
               actions: <Widget>[
                 FlatButton(
                 onPressed: ()=> Navigator.pop(context,'OK'),
