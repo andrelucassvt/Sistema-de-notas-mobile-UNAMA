@@ -1,4 +1,4 @@
-package com.example.calcular_notas_unama
+package com.flutter.calcular_notas_unama
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
