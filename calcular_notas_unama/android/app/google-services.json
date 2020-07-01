@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "771633117384",
+    "firebase_url": "https://notas-unama.firebaseio.com",
+    "project_id": "notas-unama",
+    "storage_bucket": "notas-unama.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771633117384:android:0bc13ecd25a5438c160dfd",
+        "android_client_info": {
+          "package_name": "com.flutter.calcular_notas_unama"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771633117384-ps8qrr82gqk6oiscd49kgqnf78e5036o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIMH7aKLepwFlj7597cYMeHRen7qseCpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771633117384-ps8qrr82gqk6oiscd49kgqnf78e5036o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-
+import 'package:firebase_admob/firebase_admob.dart';
 
 void main(){
-
   runApp(MaterialApp(
-
     title: "Calcular notas",
     home: Home(),
   ));
-
+  
 }
 
 
@@ -19,7 +16,8 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> {  
+
   //Controladores
   TextEditingController nota1 = TextEditingController();
   TextEditingController notaColegiada = TextEditingController();
@@ -28,8 +26,63 @@ class _HomeState extends State<Home> {
   String resultado ="";
   String resultFinal = "";
 
+  MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    keywords: <String>['flutterio', 'beautiful apps'],
+    contentUrl: 'https://flutter.io',
+    childDirected: false,
+    testDevices: <String>[],
+);
+
+BannerAd myBanner;
+InterstitialAd myInterstitial;
 
 
+void startBanner() {
+    myBanner = BannerAd(
+      adUnitId: BannerAd.testAdUnitId,
+      size: AdSize.banner,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        if (event == MobileAdEvent.opened) {
+          // MobileAdEvent.opened
+          // MobileAdEvent.clicked
+          // MobileAdEvent.closed
+          // MobileAdEvent.failedToLoad
+          // MobileAdEvent.impression
+          // MobileAdEvent.leftApplication
+        }
+        print("BannerAd event is $event");
+      },
+    );
+  }
+
+
+void displayBanner() {
+    myBanner
+      ..load()
+      ..show(
+        anchorOffset: 0.0,
+        anchorType: AnchorType.bottom,
+      );
+  }
+
+@override
+  void dispose() {
+    myBanner?.dispose();
+    myInterstitial?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAdMob.instance
+        .initialize(appId: "ca-app-pub-3652623512305285~5040470589");
+
+    startBanner();
+    displayBanner();
+ 
+  }
   void _refres(){
     setState(() {
       resultado = " ";
@@ -70,7 +123,7 @@ class _HomeState extends State<Home> {
           resultFinal = "";
 
         }else if(media < 7 && media >=4){
-          resultado = "Você ficou de prova final";
+          resultado = "Você ficou de prova final.";
           resultFinal = "Precisa tirar $formato para passar"; 
           
 
@@ -81,120 +134,123 @@ class _HomeState extends State<Home> {
         }}});
 
   }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        //Barra de cima do app
-        appBar: AppBar(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15.0),
+      child: Scaffold(
+          //Barra de cima do app
+          appBar: AppBar(
 
-          title: Text("Calcule sua nota",style: TextStyle(color: Colors.white),),
-          backgroundColor: Colors.blue,
-          
-          actions: <Widget>[
-            IconButton(icon: Icon(Icons.refresh), onPressed: (){_refres();})
-          ],
-          
-        ),
-        //Corpo do app
-        body:SingleChildScrollView(
-
-          child: Form(
-          key: validacao,
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
-          
-          //Imagem adicionada
-          ClipOval(
-            child: Align(
-              heightFactor: 1.0,
-              widthFactor: 0.5,
-              child: Image.asset("Imagens/ser.png",fit: BoxFit.cover,height: 150,), 
-            ),
-          ),
-         
-          Padding(padding: EdgeInsets.all(10.0)),
-          //Area de texto 1° avaliação
-          TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration(
-
-            labelText: "1º avaliação",labelStyle: TextStyle(color: Colors.blue,
-            fontSize: 15.0),
-
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(32))
-              ),
+            title: Text("Calcule sua nota",style: TextStyle(color: Colors.white),),
+            backgroundColor: Colors.blue,
             
-            style: TextStyle(color: Colors.blue,fontSize: 15.0),
-            controller: nota1,
-            validator: (value){
-              if(value.isEmpty){
-                return "Campo vazio!!";
-              }
-            },
+            actions: <Widget>[
+              IconButton(icon: Icon(Icons.refresh), onPressed: (){_refres();})
+            ],
+            
           ),
+          //Corpo do app
+          body:SingleChildScrollView(
 
-          Padding(padding: EdgeInsets.all(15.0)),
-          //Area de texto 2° avaliação
-          TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration(
-            labelText: "2º avaliação",labelStyle: TextStyle(color: Colors.blue,
-            fontSize: 15.0),
-
-             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(32))
-              
+            child: Form(
+            key: validacao,
+            child: Column(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
+            
+            //Imagem adicionada
+            ClipOval(
+              child: Align(
+                heightFactor: 1.0,
+                widthFactor: 0.5,
+                child: Image.asset("Imagens/ser.png",fit: BoxFit.cover,height: 150,), 
               ),
+            ),
+           
+            SizedBox(height: 55,),
+            //Area de texto 1° avaliação
+            TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
+            decoration: InputDecoration(
 
+              labelText: "1º avaliação",labelStyle: TextStyle(color: Colors.blue,
+              fontSize: 15.0),
+
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(32))
+                ),
+              
               style: TextStyle(color: Colors.blue,fontSize: 15.0),
-              controller: notaColegiada,
+              controller: nota1,
               validator: (value){
                 if(value.isEmpty){
                   return "Campo vazio!!";
                 }
               },
+            ),
+
+            Padding(padding: EdgeInsets.all(15.0)),
+            //Area de texto 2° avaliação
+            TextFormField(keyboardType: TextInputType.numberWithOptions(decimal: true),
+            decoration: InputDecoration(
+              labelText: "2º avaliação",labelStyle: TextStyle(color: Colors.blue,
+              fontSize: 15.0),
+
+               border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(32))
+                
+                ),
+
+                style: TextStyle(color: Colors.blue,fontSize: 15.0),
+                controller: notaColegiada,
+                validator: (value){
+                  if(value.isEmpty){
+                    return "Campo vazio!!";
+                  }
+                },
+            ),
+            
+            
+            ],),)
+           
           ),
           
           
-          ],),)
-         
-        ),
-        
-        
-        
-        //Barra de baxio do botão
-        bottomNavigationBar: BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            child: Container(height: 50.0,),
-            color: Colors.blue,
-            
+          
+          //Barra de baxio do botão
+          bottomNavigationBar: BottomAppBar(
+              child: Container(height: 60.0,),
+              color: Colors.blue,
+              
+            ),
+          //Botao
+          floatingActionButton: FloatingActionButton.extended(
+          icon: Icon(Icons.offline_pin),
+          label: Text("Calcule"),
+          backgroundColor: Colors.green,
+          onPressed: (){
+            if(validacao.currentState.validate()){
+              _calcular();
+              showDialog<String>(context: context,
+              
+              builder: (BuildContext context)=> AlertDialog(
+
+                title: Text("Resultado"),
+                content: Text("$resultado \n$resultFinal"),
+                actions: <Widget>[
+                  FlatButton(
+                  onPressed: ()=> Navigator.pop(context,'OK'),
+                  child: Text("OK"))
+
+                ],
+              )
+              );
+            }
+          },
           ),
-        //Botao
-        floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.offline_pin),
-        backgroundColor: Colors.green,
-        onPressed: (){
-          if(validacao.currentState.validate()){
-            _calcular();
-            showDialog<String>(context: context,
-            
-            builder: (BuildContext context)=> AlertDialog(
+          //Colocando o botão no centro
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
-              title: Text("Resultado"),
-              content: Text("$resultado $resultFinal"),
-              actions: <Widget>[
-                FlatButton(
-                onPressed: ()=> Navigator.pop(context,'OK'),
-                child: Text("OK"))
-
-              ],
-            )
-            );
-          }
-        },
-        ),
-        //Colocando o botão no centro
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
+      ),
     );
   }
 }
+
