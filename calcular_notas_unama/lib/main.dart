@@ -40,7 +40,7 @@ InterstitialAd myInterstitial;
 void startBanner() {
     myBanner = BannerAd(
       adUnitId: BannerAd.testAdUnitId,
-      size: AdSize.banner,
+      size: AdSize.fullBanner,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
         if (event == MobileAdEvent.opened) {
@@ -137,7 +137,7 @@ void displayBanner() {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 15.0),
+      padding: const EdgeInsets.only(bottom: 25.0),
       child: Scaffold(
           //Barra de cima do app
           appBar: AppBar(

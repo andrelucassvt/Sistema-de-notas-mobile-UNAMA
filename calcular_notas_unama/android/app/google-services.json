@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "771633117384",
-    "firebase_url": "https://notas-unama.firebaseio.com",
-    "project_id": "notas-unama",
-    "storage_bucket": "notas-unama.appspot.com"
+    "project_number": "35806299757",
+    "firebase_url": "https://calcular-notas-6f812.firebaseio.com",
+    "project_id": "calcular-notas-6f812",
+    "storage_bucket": "calcular-notas-6f812.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:771633117384:android:0bc13ecd25a5438c160dfd",
+        "mobilesdk_app_id": "1:35806299757:android:ec789d30e34ea5c53d6164",
         "android_client_info": {
           "package_name": "com.flutter.calcular_notas_unama"
         }
       },
       "oauth_client": [
         {
-          "client_id": "771633117384-ps8qrr82gqk6oiscd49kgqnf78e5036o.apps.googleusercontent.com",
+          "client_id": "35806299757-vn5s2q421m21d5krejcr8mr2j6tsu1e5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAIMH7aKLepwFlj7597cYMeHRen7qseCpI"
+          "current_key": "AIzaSyDEbgmT-fJ68LrnIoYXK9704ImAjnOdvlU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "771633117384-ps8qrr82gqk6oiscd49kgqnf78e5036o.apps.googleusercontent.com",
+              "client_id": "35806299757-vn5s2q421m21d5krejcr8mr2j6tsu1e5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
