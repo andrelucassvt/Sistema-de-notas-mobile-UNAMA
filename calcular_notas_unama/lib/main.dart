@@ -26,62 +26,31 @@ class _HomeState extends State<Home> {
   String resultado ="";
   String resultFinal = "";
 
-  MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    keywords: <String>['flutterio', 'beautiful apps'],
+  static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    keywords: <String>['Faculdades', 'Farmacias'],
     contentUrl: 'https://flutter.io',
     childDirected: false,
-    testDevices: <String>[],
-);
-
-BannerAd myBanner;
-InterstitialAd myInterstitial;
+    testDevices: <String>[], // Android emulators are considered test devices
+  );
 
 
-void startBanner() {
-    myBanner = BannerAd(
-      adUnitId: BannerAd.testAdUnitId,
-      size: AdSize.fullBanner,
-      targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        if (event == MobileAdEvent.opened) {
-          // MobileAdEvent.opened
-          // MobileAdEvent.clicked
-          // MobileAdEvent.closed
-          // MobileAdEvent.failedToLoad
-          // MobileAdEvent.impression
-          // MobileAdEvent.leftApplication
-        }
-        print("BannerAd event is $event");
-      },
-    );
-  }
+ BannerAd myBanner = BannerAd(
+    adUnitId: 'ca-app-pub-3652623512305285/3005334180',
+    size: AdSize.fullBanner,
+    targetingInfo: targetingInfo,
+    listener: (MobileAdEvent event) {
+      print("BannerAd event is $event");
+    },
+  );
 
-
-void displayBanner() {
-    myBanner
-      ..load()
-      ..show(
-        anchorOffset: 0.0,
-        anchorType: AnchorType.bottom,
-      );
-  }
-
-@override
-  void dispose() {
-    myBanner?.dispose();
-    myInterstitial?.dispose();
-    super.dispose();
-  }
-
+  BannerAd _bannerAd;
+  
   @override
   void initState() {
     super.initState();
     FirebaseAdMob.instance
         .initialize(appId: "ca-app-pub-3652623512305285~5040470589");
-
-    startBanner();
-    displayBanner();
- 
+    _bannerAd = myBanner..load()..show(anchorType: AnchorType.bottom);
   }
   void _refres(){
     setState(() {
